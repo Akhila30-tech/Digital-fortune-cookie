@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gen Z Fortune Cookie</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <div class="container">
+        <h1>🍪 Your Daily Fortune</h1>
+        <div id="cookie-container" class="cookie-container">
+            <div id="cookie" style="font-size: 150px; cursor: pointer; user-select: none;">🍪</div>
+        </div>
+        <button id="fortuneBtn">Open Cookie</button>
+        <p id="fortuneText" class="fortune-text"></p>
+    </div>
+
+    <script>
+        const cookieBtn = document.getElementById("fortuneBtn");
+        const fortuneText = document.getElementById("fortuneText");
+        const cookieImg = document.getElementById("cookie");
+
+        cookieBtn.addEventListener("click", async () => {
+            // Animate cookie "breaking"
+            cookieImg.classList.add("shake");
+            fortuneText.textContent = "";
+            cookieBtn.disabled = true;
+
+            // Wait 1 second for animation
+            setTimeout(async () => {
+                // Fetch fortune from backend
+                try {
+                    const response = await fetch("/fortune");
+                    const data = await response.json();
+                    fortuneText.textContent = data.fortune;
+
+                    // Launch confetti 🎉🎊
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    });
+                } catch (error) {
+                    fortuneText.textContent = "Oops! Something went wrong. Try again.";
+                }
+                cookieImg.classList.remove("shake");
+                cookieBtn.disabled = false;
+            }, 1000);
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</body>
+</html>

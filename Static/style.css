@@ -1,0 +1,77 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    color: #3a3a3a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    background: #fff;
+    padding: 2rem 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    width: 320px;
+}
+
+h1 {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.cookie-container {
+    margin-bottom: 1rem;
+}
+
+#cookie {
+    font-size: 150px;
+    cursor: pointer;
+    user-select: none;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+#cookie.shake {
+    animation: shake 0.5s;
+}
+
+
+
+@keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(15deg); }
+    50% { transform: rotate(-15deg); }
+    75% { transform: rotate(10deg); }
+}
+
+button {
+    background: #f8b500;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(248, 181, 0, 0.4);
+    transition: background 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+    background: #ffc93c;
+}
+
+button:disabled {
+    background: #f0ad4e;
+    cursor: not-allowed;
+}
+
+.fortune-text {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    min-height: 60px;
+    color: #5a3e00;
+}
